@@ -1,0 +1,204 @@
+<!Doctype html>
+<html lang="ko">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+
+        <title>스파르타코딩클럽 | 타임 어택</title>
+
+        <!-- style -->
+        <style type="text/css">
+            * {
+                font-family: "Stylish", sans-serif;
+            }
+
+            .wrap {
+                width: 900px;
+                margin: auto;
+            }
+
+
+        </style>
+        <script>
+
+let code
+let group
+let name
+
+
+            function next_2() {
+                $("#open_next_1").hide()
+                $('#open_next_2').show()
+            }
+            function next_3() {
+                $("#open_next_2").hide()
+                $('#open_next_3').show()
+            }
+            
+
+            function codes() {
+                var market = $('input:radio[name="market"]:checked').val();
+                var sector = $('input:radio[name="sector"]:checked').val();
+                var tag = $('input:radio[name="tag"]:checked').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/codes/search",
+                    data: {market:market,sector:sector,tag:tag},
+                    success: function (response) { 
+                        $('#open_next_3').hide()
+                        
+
+                        for (let i = 0 ; i < response['target'].length ; i ++)
+                        {
+                        let code_resp = response['target'][i]['code']
+
+                        let result = `
+                        <div>
+                            <label> ${response['target'][i]['name']} </label>
+                            <button type="button" class="btn btn-info" onclick="show_info('${code_resp}')">정보</button>
+                        </div>`
+                        console.log(response['target'][i]['name'])
+                        $('#result').append(result)
+                    }
+                    let result = `<button type="button" id="reset_button"class="btn btn-secondary" onclick="reset()">다시선택</button>`
+                    $('#result').append(result)
+
+
+                    }
+                })
+            }
+
+            function show_info(code) {
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/show_info",
+                    data: {code:code},
+                    success: function (response) { 
+                        let count = response['target']['count']
+                        let per = response['target']['per']
+                        let total_count = response['target']['total_count']
+                        alert(`주가: ${count}
+시총 : ${total_count}
+PER : ${per}`)
+                    }
+                })
+            }
+            
+            function reset(){
+                $('#group').empty()
+                $('#result').empty()
+                $('#open_next_1').hide()
+                $("#open_next_2").hide()
+                $("#open_next_3").hide()
+                $("#btn-post-box").show()
+            }
+
+            function show_codes() {
+                $.ajax({
+                    type: "GET",
+                    url: "/codes",
+                    data: {},
+                    success: function (response) {
+                        code = response['group']['code']
+                        group = response['group']['group']
+                        name = response['group']['name']
+                        
+                        let temp_html = `<div id="open_next_1">
+                        <div>
+                            <input type="radio" id="${code[0]}" name="market" value="${code[0]}">
+                            <label for="${code[0]}"> ${name[6]} </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="${code[1]}" name="market" value="${code[1]}">
+                            <label for="${code[1]}"> ${name[5]} </label>
+                        </div>
+                        <div>
+                            <button onclick="next_2()" type="button" class="btn btn-success">다음</button>
+                        </div>
+                    </div>
+                    <div id="open_next_2">
+                        <div>
+                            <input type="radio" id="${code[2]}" name="sector" value="${code[2]}">
+                            <label for="${code[2]}"> ${name[1]} </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="${code[3]}" name="sector" value="${code[3]}">
+                            <label for="${code[3]}"> ${name[2]} </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="${code[4]}" name="sector" value="${code[4]}">
+                            <label for="${code[4]}"> ${name[3]} </label>
+                        </div>
+                        <div>
+                            <button onclick="next_3()" type="button" class="btn btn-success">다음</button>
+                        </div>
+                    </div>
+                    <div id="open_next_3">
+                        <div>
+                            <input type="radio" id="${code[5]}" name="tag" value="${code[5]}">
+                            <label for="${code[5]}"> ${name[0]} </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="${code[6]}" name="tag" value="${code[6]}">
+                            <label for="${code[6]}"> ${name[7]} </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="${code[7]}" name="tag" value="${code[7]}">
+                            <label for="${code[7]}"> ${name[4]} </label>
+                        </div>
+                        <div>
+                            <button onclick="codes()" type="button" class="btn btn-success">다음</button>
+                        </div>
+                    </div>`
+
+                                            
+
+                $('#group').append(temp_html)
+                $("#btn-post-box").hide()
+                $('#open_next_1').show()
+                $("#open_next_2").hide()
+                $("#open_next_3").hide()
+
+                    }
+                })
+            }
+        </script>
+
+    </head>
+
+    <body>
+        <div class="wrap">
+            <div class="jumbotron">
+                <h1 class="display-4">주식 종목 추천!!</h1>
+                <p class="lead">원하시는 종목을 추천합니다.</p>
+                <hr class="my-4">
+                <p class="lead">
+                    <button onclick="show_codes()" id="btn-post-box" type="button" class="btn btn-primary">추천 시작
+                    </button>
+                    <div id= group></div>
+                    <div id= result></div>
+                </p>
+            </div>
+        </div>
+    </body>
+
+</html>
