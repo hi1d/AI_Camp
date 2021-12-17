@@ -58,7 +58,9 @@ def show_info():
         '#chart_area > div.rate_info > div > p.no_today > em > span').text
     total_count = soup.select_one(
         '#_market_sum').text
-    total = re.sub('[^0-9가-힣]+', '', total_count)
+    # total = re.sub('[^0-9가-힣]+', '', total_count)
+    total = total_count
+    print(total)
     per = soup.select_one(
         '#tab_con1 > div:nth-child(5) > table > tbody:nth-child(2) > tr > td > em').text
     doc = {
