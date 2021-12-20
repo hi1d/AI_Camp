@@ -1,10 +1,8 @@
 # up & down 게임 (플레이어 버전)
 
 import random
-import sys
 
-
-# com_set_num = random.randrange(1, 100)
+# com_set_num = random.randrange(1, 101)
 
 
 # def com_up_down(com_set_num):
@@ -23,7 +21,7 @@ import sys
 # com_up_down(com_set_num)
 
 
-# up & down 게임 (컴퓨터 버전)
+# # up & down 게임 (컴퓨터 버전)
 
 def ply_up_down():
     min_num = 1
@@ -36,7 +34,7 @@ def ply_up_down():
         return ply_up_down()
 
     while True:
-        com_num = min_num + ((max_num-min_num) // 2)
+        com_num = min_num + ((max_num-min_num)//2)
         print(com_num)
         if com_num == ply_set_num:
             return print("성공")
