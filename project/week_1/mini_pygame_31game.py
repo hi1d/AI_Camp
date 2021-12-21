@@ -24,21 +24,25 @@ import random
 # (가능하다면, 컴퓨터가 숫자를 뽑는 코드와 플레이어가 숫자를 뽑는 코드는 함수화를 해보세요!)
 
 # turn = random.randint(0, 1)
-# # turn 0 = Player Trun
-# # turn 1 = Computer Turn
+# # turn 1 = Player Trun
+# # turn 0 = Computer Turn
 # global number
 # global Flag
+
 # number = 0
 # Flag = True
 
 
 # def player_input():
-#     count = int(input("시행 횟수: "))
-#     if count > 3:
+#     try:
+#         count = int(input("시행 횟수: "))
+#     except ValueError:
+#         print('숫자를 입력해주세요.')
+#         player_input()
+#     if count > 3 or count < 1:
 #         print("1~3안의 범위로 입력해주세요.")
 #         player_input()
 #     return count
-
 
 # def player_turn(count):
 #     global number
@@ -68,19 +72,20 @@ import random
 #             return True
 #     return False
 
+# def game_start():
+#     while Flag:
+#         if turn:
+#             count = player_input()
+#             if player_turn(count):
+#                 return
+#             computer_turn()
+#         else:
+#             if computer_turn():
+#                 return
+#             count = player_input()
+#             player_turn(count)
 
-# while Flag:
-#     if turn == 0:
-#         count = player_input()
-#         if player_turn(count):
-#             break
-#         computer_turn()
-#     else:
-#         if computer_turn():
-#             break
-#         count = player_input()
-#         player_turn(count)
-
+# game_start()
 # == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
 
 # 베스킨라빈스 31 인공지능 만들기
@@ -111,8 +116,8 @@ import random
 # (가능하다면, 컴퓨터가 숫자를 뽑는 코드와 플레이어가 숫자를 뽑는 코드는 함수화를 해보세요!)
 
 turn = random.randint(0, 1)
-# turn 0 = Player Trun
-# turn 1 = Computer Turn
+# turn 1 = Player Trun
+# turn 0 = Computer Turn
 global number
 global Flag
 number = 0
@@ -120,17 +125,18 @@ Flag = True
 
 
 def player_input():
-    count = int(input("시행 횟수: "))
-    if count > 3:
+    global count
+    try:
+        count = int(input("시행 횟수: "))
+    except ValueError:
+        print('숫자를 입력해주세요.')
+        player_input()
+
+    if count > 3 or count < 1:
         print("1~3안의 범위로 입력해주세요.")
         player_input()
     return count
 
-
-# 2 6 10 14 18 22 26 30
-# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
-# 1 2 3 0 1 2 3 0 1 2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2
-# number % 4 == 2 면 이김.
 
 def computer_count():
     global number
@@ -175,14 +181,23 @@ def computer_turn():
     return False
 
 
-while Flag:
-    if turn == 0:
-        count = player_input()
-        if player_turn(count):
-            break
-        computer_turn()
-    else:
-        if computer_turn():
-            break
-        count = player_input()
-        player_turn(count)
+def game_start():
+    while Flag:
+        if turn:
+            count = player_input()
+            if player_turn(count):
+                return
+            computer_turn()
+        else:
+            if computer_turn():
+                return
+            count = player_input()
+            player_turn(count)
+
+
+# game_start()
+a = 'a'
+b = 'abcd'
+
+
+print(bytes(a))
