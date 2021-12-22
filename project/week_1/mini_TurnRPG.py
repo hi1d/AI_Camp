@@ -85,9 +85,6 @@ class Object:
 
 class player(Object):
 
-    def __init__(self, name, hp, damage):
-        super().__init__(name, hp, damage)
-
     def magic(self, target):
         target.hp -= 50
         print(f"{self.name}이(가) {target.name}을(를) 마법 공격!")
@@ -120,9 +117,6 @@ class player(Object):
 
 class monster(Object):
     monster_list = {}
-
-    def __init__(self, name, hp, damage):
-        super().__init__(name, hp, damage)
 
     def wait(self):
         print(f"{self.name}이(가) 대기했습니다.")
