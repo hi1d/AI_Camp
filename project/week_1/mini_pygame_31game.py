@@ -195,9 +195,4 @@ def game_start():
             player_turn(count)
 
 
-# game_start()
-a = 'a'
-b = 'abcd'
-
-
-print(bytes(a))
+game_start()
