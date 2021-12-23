@@ -1,0 +1,81 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile_index {
+  width: 480px;
+  height: 800px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid lightgray;
+}
+
+.profiie_content {
+  width: 480px;
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  background-color: #0d7795;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.profiie_content_text {
+  width: 350px;
+  font-size: 18px;
+  font-weight: 300;
+}
+.profile_userinfo {
+  flex: 4;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile_image {
+  width: 130px;
+  height: 130px;
+  position: absolute;
+  bottom: 260px;
+  left: 173px;
+  border-radius: 130px;
+  background-color: cadetblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(./bori.jpeg);
+  background-position: center;
+  background-size: cover;
+}
+
+.profile_userinfo_name {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.profile_userinfo_icons {
+  width: 260px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons {
+  width: 50px;
+  height: 50px;
+}
+
+.profile_userinfo_text {
+  width: 270px;
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 8px;
+}
