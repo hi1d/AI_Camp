@@ -1,0 +1,293 @@
+body {
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  flex-direction: column;
+}
+
+.nav_container {
+  width: 100%;
+  height: 6%;
+  position: fixed;
+  display: flex;
+  top: 0;
+}
+
+.nav {
+  display: flex;
+  width: 100vw;
+  max-width: 100vw;
+  height: 6vh;
+  justify-content: space-between;
+  align-content: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid lightgray;
+}
+
+#camera {
+  height: 60%;
+  display: flex;
+  position: relative;
+  left: 10%;
+  top: 10%;
+}
+#logo {
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+#dm {
+  display: flex;
+  height: 60%;
+  right: 10%;
+  top: 10%;
+  position: relative;
+}
+
+.story_container {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  background: #fafafa;
+  overflow: hidden;
+  margin: auto;
+  border: 1px solid lightgray;
+}
+
+.story {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  margin-left: 5%;
+  font-size: 0.7rem;
+  color: black;
+}
+
+.story_content {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  border-radius: 50%;
+  overflow: hidden;
+  justify-content: center;
+  margin-top: 0.625rem;
+  flex-direction: row;
+  padding: 0.05rem;
+  background: linear-gradient(#e30ed2, #f0a64e 80%);
+}
+
+.story_content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.feeds_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.feed {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.feed_image {
+  width: 100%;
+  display: flex;
+}
+
+.user {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  justify-content: space-between;
+}
+
+.user .user_left {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+}
+
+.profile {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-direction: row;
+}
+
+.user .user_name {
+  font-size: 14px;
+  width: auto;
+  font-weight: bold;
+  margin-left: 0.6rem;
+  position: relative;
+}
+
+.more {
+  height: 0.3rem;
+  display: flex;
+  position: relative;
+  right: 3%;
+}
+
+.post_icons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.icons_left {
+  width: 100%;
+  margin-left: 0.5rem;
+}
+
+.icons_right {
+  margin-right: 0.5rem;
+}
+
+#like {
+  width: 1.5rem;
+  margin-right: 0.3rem;
+}
+
+#comment {
+  width: 1.3rem;
+  margin-right: 0.3rem;
+}
+
+#post_dm {
+  width: 1.4rem;
+}
+
+#favorite {
+  width: 1.2rem;
+}
+
+.feed_post {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed_like {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 0.7rem;
+}
+
+.like_image {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-direction: row;
+  margin-right: 0.3rem;
+}
+
+.bold_text {
+  font-weight: bold;
+}
+
+.feed_content {
+  width: 100%;
+  margin-left: 0.7rem;
+}
+
+.content_text {
+  width: 100%;
+}
+
+.feed_time {
+  width: 100%;
+  font-size: 0.7rem;
+  margin-left: 0.7rem;
+  color: lightgray;
+}
+
+.bottom_nav_container {
+  width: 100%;
+  height: 6%;
+  bottom: 0;
+  position: fixed;
+  display: flex;
+}
+
+.bottom_nav {
+  display: flex;
+  width: 100vw;
+  height: 6vh;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border-top: 1px solid lightgray;
+}
+
+#home {
+  width: 1.5rem;
+}
+
+#search {
+  width: 1.5rem;
+}
+
+#trending {
+  width: 1.5rem;
+}
+
+.bottom_blank {
+  width: 100%;
+  height: 3rem;
+}
+
+.top_blank {
+  width: 100%;
+  height: 3rem;
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    width: 70%;
+  }
+  .nav_container {
+    width: 70%;
+  }
+  .story_content {
+    width: 70%;
+  }
+  .bottom_nav_container {
+    width: 70%;
+  }
+  .story {
+    width: 70%;
+  }
+  .story_content {
+    width: 5rem;
+    height: 5rem;
+  }
+}
