@@ -18,8 +18,9 @@ from django.urls import path, include
 from first_app import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    # path('', views.home, name='home'),
     path('result', views.result, name='result'),
     path('admin/', admin.site.urls),
     path('',include('user.urls')),
+    path('',include('tweet.urls')),
 ]
