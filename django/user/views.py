@@ -15,17 +15,19 @@ def sign_up_view(request):
         else:
             return render(request, 'users/signup.html')
     elif request.method == 'POST':
-        username = request.POST.get('username',None)
-        password = request.POST.get('password',None)
-        password2 = request.POST.get('password2',None)
-        bio = request.POST.get('bio',None)
+        username = request.POST.get('username','')
+        password = request.POST.get('password','')
+        password2 = request.POST.get('password2','')
+        bio = request.POST.get('bio','')
         
         if password != password2:
-            return render(request, 'users/signup.html')
+            return render(request, 'users/signup.html',{'error_msg':'패스워드가 틀립니다.'})
         else:
+            if username == '' or password =='':
+                return render(request,'users/signup.html', {'error_msg':'빈칸을 입력해주세요.'})
             user_check = get_user_model().objects.filter(username=username)
             if user_check:
-                return render(request, 'users/signup.html')
+                return render(request, 'users/signup.html',{'error_msg':'존재하는 아이디입니다.'})
         
         UserModel.objects.create_user(
             username = username,
@@ -42,15 +44,15 @@ def sign_in_view(request):
         else:        
             return render(request, 'users/signin.html')
     elif request.method =='POST':
-        username = request.POST.get('username',None)
-        password = request.POST.get('password',None)
+        username = request.POST.get('username','')
+        password = request.POST.get('password','')
 
         me = auth.authenticate(request, username=username, password=password)   # 계정확인
         if me is not None:
             auth.login(request, me)
             return redirect('/')
         else:
-            return redirect('/sign-in')
+            return render(request, 'users/signin.html',{'error_msg':'아이디 또는 비밀번호를 확인해주세요.'})
 
 
 @login_required         # 로그인상태일경우만 접근 가능.
