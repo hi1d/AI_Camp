@@ -1,3 +1,4 @@
+from re import template
 from django.shortcuts import render, redirect
 from .models import TweetModel, TweetComment
 from django.contrib.auth.decorators import login_required
@@ -11,35 +12,28 @@ def home(request):
         return redirect('/tweet')
     else:
         return redirect('/sign-in')
-    
+
+class tweet_show(ListView):
+    model = TweetModel
+    ordering = '-created_at'
+    template_name = 'tweet/home.html'
 
 def tweet(request):
-    if request.method =='GET':
-        user = request.user.is_authenticated
-        if user:
-            tweets = TweetModel.objects.all().order_by('-created_at')
-            return render(request, 'tweet/home.html', {'tweets':tweets})
-        else:
-            return redirect('/sign-in')
-    elif request.method =='POST':
-        user = request.user
-        content = request.POST.get('my-content', '')
-        tags = request.POST.get('tag','').split(',')
-
-        if content == '':
-            tweets = TweetModel.objects.all().order_by('-created_at')
-            return render(request, 'tweet/home.html',{'error_msg':'빈 칸을 입력해주세요.','tweets':tweets})
-        
-                
-        my_tweet = TweetModel.objects.create(author = user,content = content)
-        for tag in tags:
-            tag = tag.strip()
-            if tag != '':
-                my_tweet.tags.add(tag)
-
-        my_tweet.save()
-
-        return redirect('/tweet')
+    user = request.user
+    content = request.POST.get('my-content', '')
+    tags = request.POST.get('tag','').split(',')
+    if content == '':
+        tweets = TweetModel.objects.all().order_by('-created_at')
+        return render(request, 'tweet/home.html',{'error_msg':'빈 칸을 입력해주세요.','tweets':tweets})
+    
+            
+    my_tweet = TweetModel.objects.create(author = user,content = content)
+    for tag in tags:
+        tag = tag.strip()
+        if tag != '':
+            my_tweet.tags.add(tag)
+    my_tweet.save()
+    return redirect('/tweet')
 
 @login_required
 def delete_tweet(request,id):
