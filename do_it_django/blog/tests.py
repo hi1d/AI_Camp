@@ -76,7 +76,7 @@ class TestView(TestCase):
         self.assertIn('About', navbar.text)
 
         # post_title in Web Tab Title
-        self.assertIn(post_001.title, soup.title)
+        self.assertIn(post_001.title, soup.title.text)
 
         # post_title in Post-area
         main_area = soup.find('div', id='main-area')
