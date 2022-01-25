@@ -140,6 +140,7 @@ class TestView(TestCase):
         # navbar
         soup = BeautifulSoup(response.content, 'html.parser')
         self.navbar_test(soup)
+        self.category_card_test(soup)
 
         # post_title in Web Tab Title
         self.assertIn(self.post_001.title, soup.title.text)
@@ -148,6 +149,8 @@ class TestView(TestCase):
         main_area = soup.find('div', id='main-area')
         post_area = main_area.find('div', id='post-area')
         self.assertIn(self.post_001.title, post_area.text)
+        self.assertIn(self.post_001.category.name, post_area.text)
 
+        self.assertIn(self.user_tester1.username.upper(), post_area.text)
         # post_content in post-area
         self.assertIn(self.post_001.content, post_area.text)
