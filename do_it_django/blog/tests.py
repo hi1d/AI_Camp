@@ -1,7 +1,9 @@
 from django.http import response
 from django.test import TestCase, Client
 from bs4 import BeautifulSoup
+from pip import main
 from .models import Post
+from django.contrib.auth.models import User
 
 # Create your tests here.
 
@@ -9,6 +11,14 @@ from .models import Post
 class TestView(TestCase):
     def setUp(self):
         self.client = Client()
+        self.user_tester1 = User.objects.create_user(
+            username='tester1',
+            password='test',
+        )
+        self.user_tester2 = User.objects.create_user(
+            username='tester2',
+            password='test',
+        )
 
     def navbar_test(self, soup):
         # NAV Bar
@@ -51,10 +61,12 @@ class TestView(TestCase):
         post_001 = Post.objects.create(
             title='First Post',
             content='Hello World, We are the World.',
+            author=self.user_tester1,
         )
         post_002 = Post.objects.create(
             title='Second Post',
             content='First is not at all',
+            author=self.user_tester2,
         )
         self.assertEqual(Post.objects.count(), 2)
 
@@ -69,12 +81,16 @@ class TestView(TestCase):
 
         # not "Post is Empty"
         self.assertNotIn('Post is Empty.', main_area.text)
+        self.assertIn(post_001.author.username.upper(), main_area.text)
+        self.assertIn(post_002.author.username.upper(), main_area.text)
 
     def test_post_detail(self):
         # if post
         post_001 = Post.objects.create(
             title='First Post',
-            content='Hello, World. We are the World.'
+            content='Hello, World. We are the World.',
+            author=self.user_tester1,
+
         )
         self.assertEqual(Post.objects.count(), 1)
 
