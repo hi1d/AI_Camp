@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
-from django.http import HttpResponse
 from django.contrib.auth import get_user_model # 사용자가 DB에 있는지 검사하는 함수
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -46,6 +45,8 @@ def sign_in_view(request):
     elif request.method =='POST':
         username = request.POST.get('username','')
         password = request.POST.get('password','')
+        
+
 
         me = auth.authenticate(request, username=username, password=password)   # 계정확인
         if me is not None:

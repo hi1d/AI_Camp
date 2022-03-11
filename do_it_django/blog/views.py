@@ -29,7 +29,7 @@ class PostDetail(DetailView):
 
 # def index(request):
 #     posts = Post.objects.all().order_by('-pk')
-#
+
 #     return render(
 #         request,
 #         'blog/index.html',
